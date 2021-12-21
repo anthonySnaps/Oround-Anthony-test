@@ -1,0 +1,6 @@
+framework module finger {
+  umbrella header "finger.h"
+
+  export *
+  module * { export * }
+}
