@@ -51,17 +51,17 @@ class MainViewController: UIViewController,
         mainWebView.uiDelegate = self
         
         view = mainWebView
-
+        
         // 1.
         if #available(iOS 13.0, *) {
-
+            
             let margin = view.layoutMarginsGuide
             let statusbarView = UIView()
             statusbarView.backgroundColor = .white
             statusbarView.frame = CGRect.zero
             view.addSubview(statusbarView)
             statusbarView.translatesAutoresizingMaskIntoConstraints = false
-   
+            
             NSLayoutConstraint.activate([
                 statusbarView.topAnchor.constraint(equalTo: view.topAnchor),
                 statusbarView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1.0),
@@ -90,6 +90,33 @@ class MainViewController: UIViewController,
         mainWebView.configuration.preferences.javaScriptCanOpenWindowsAutomatically = true
     }
     
+    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+        let alertController = UIAlertController(title: "test", message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "확인", style: .cancel) { _ in
+            completionHandler()
+        }
+        alertController.addAction(cancelAction)
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+        let alertController = UIAlertController(title: "test", message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
+            completionHandler(false)
+        }
+        let okAction = UIAlertAction(title: "확인", style: .default) { _ in
+            completionHandler(true)
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    
     /**
      * POPUP Window
      */
@@ -108,6 +135,55 @@ class MainViewController: UIViewController,
         view.addSubview(popupWebView!)
         return popupWebView!
     }
+    
+    
+    fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+        return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+    }
+
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
+        print("@@@  decidePolicyFor navigationAction")
+        guard let requestURL = navigationAction.request.url else {return}
+        let url = requestURL.absoluteString
+        let hostAddress = navigationAction.request.url?.host
+        // To connnect app store
+        if hostAddress == "itunes.apple.com" {
+            if UIApplication.shared.canOpenURL(requestURL) {
+                UIApplication.shared.open(requestURL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+                decisionHandler(.cancel)
+                return
+            }
+        }
+#if DEBUG
+        print("=====>url = \(url), host = \(hostAddress?.description ?? "")")
+#endif
+        let url_elements = url.components(separatedBy: ":")
+        if url_elements[0].contains("http") == false &&
+            url_elements[0].contains("https") == false {
+            
+            if UIApplication.shared.canOpenURL(requestURL) {
+                UIApplication.shared.open(requestURL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+            } else {    // 만약  Info.plist의 white list에 등록되지 않은 앱 스키마가 있는 경우를 위해 사용, 신용카드 결제화면등을 위해 필요, 해당 결제앱 스키마 호출
+                if url.contains("about:blank") == true {
+                    print("@@@ Browser can't be opened, about:blank !! @@@")
+                }else{
+                    print("@@@ Browser can't be opened, but Scheme try to call !! @@@")
+                    UIApplication.shared.open(requestURL, options: [:], completionHandler: nil)
+                }
+                
+            }
+            
+            decisionHandler(.cancel)
+            return
+            
+        }
+        decisionHandler(.allow)
+        
+    }
+    
+    
+    
     
     func webViewDidClose(_ webView: WKWebView) {
         if webView == popupWebView {
