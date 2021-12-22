@@ -74,7 +74,6 @@
 			children = (
 				A9D7A66B2770BEF800094E55 /* oround.h */,
 				5A9B92E5248A2EB800B88C61 /* oround */,
-				5A9B92E4248A2EB800B88C61 /* Products */,
 				97FC189B05649631570EC25D /* Pods */,
 				F9F00510A299D8E09CC7367A /* Frameworks */,
 				A9D7A66A2770BEF800094E55 /* oround-Bridging-Header.h */,
@@ -87,6 +86,7 @@
 				5A9B92E3248A2EB800B88C61 /* oround.app */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		5A9B92E5248A2EB800B88C61 /* oround */ = {
@@ -103,6 +103,7 @@
 				5A9B92EF248A2EBA00B88C61 /* LaunchScreen.storyboard */,
 				5A9B92F2248A2EBA00B88C61 /* Info.plist */,
 				A952E746276EC62D00710434 /* Podfile */,
+				5A9B92E4248A2EB800B88C61 /* Products */,
 			);
 			path = oround;
 			sourceTree = "<group>";
@@ -415,7 +416,7 @@
 				CODE_SIGN_ENTITLEMENTS = oround/oround.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = U5K7UFZ43J;
 				INFOPLIST_FILE = oround/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -441,8 +442,8 @@
 				CODE_SIGN_ENTITLEMENTS = oround/oround.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = U5K7UFZ43J;
 				INFOPLIST_FILE = oround/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

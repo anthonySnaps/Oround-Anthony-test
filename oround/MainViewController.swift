@@ -19,8 +19,8 @@ class MainViewController: UIViewController,
     let popupViewContentController = WKUserContentController()
     
     lazy var button: UIButton = {
-        let button = UIButton(frame: CGRect(x:self.view.frame.maxX-60,
-                                            y:40,
+        let button = UIButton(frame: CGRect(x:100,
+                                            y:self.view.frame.maxX - 60,
                                             width:50,
                                             height:50))
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
@@ -51,11 +51,35 @@ class MainViewController: UIViewController,
         mainWebView.uiDelegate = self
         
         view = mainWebView
+
+        // 1.
+        if #available(iOS 13.0, *) {
+
+            let margin = view.layoutMarginsGuide
+            let statusbarView = UIView()
+            statusbarView.backgroundColor = .white
+            statusbarView.frame = CGRect.zero
+            view.addSubview(statusbarView)
+            statusbarView.translatesAutoresizingMaskIntoConstraints = false
+   
+            NSLayoutConstraint.activate([
+                statusbarView.topAnchor.constraint(equalTo: view.topAnchor),
+                statusbarView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1.0),
+                statusbarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                statusbarView.bottomAnchor.constraint(equalTo: margin.topAnchor)
+            ])
+        } else {
+            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+            statusBar?.backgroundColor = .white
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupLayout()
+        
+        popupWebView?.addSubview(button)
     }
     
     // Setup
@@ -80,7 +104,7 @@ class MainViewController: UIViewController,
         popupWebView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         popupWebView?.navigationDelegate = self
         popupWebView?.uiDelegate = self
-        popupWebView?.addSubview(button);
+        
         view.addSubview(popupWebView!)
         return popupWebView!
     }
