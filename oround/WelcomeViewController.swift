@@ -77,7 +77,7 @@ func UIColorFromHex(rgb:UInt32, alpha:Double=1.0)->UIColor {
 class WelcomeViewController: UIViewController, UIScrollViewDelegate {
 
     
-    let container = UIView()
+//    let container = UIView()
     let pageSize = 5
     var pageDataList = WelcomePageViewModel.makeData()
     
@@ -123,7 +123,7 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
             let imageWidth = image.size.width*pageDataList[i].scale
             let imageHeight = image.size.height*pageDataList[i].scale
             let imageView = UIImageView(image: image)
-            var marginLeft = (width - imageWidth) / 2
+            let marginLeft = (width - imageWidth) / 2
             let marginTop = (height - imageHeight) / 2 - 20
             debugPrint("\(i) : \(width) - \(image.size.width)")
             

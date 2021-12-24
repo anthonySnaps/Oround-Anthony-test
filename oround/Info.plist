@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>프로필 이미지 및 아트워크 업로드를 위해 미디어를 사용합니다</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -22,6 +20,8 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -31,6 +31,14 @@
 		<key>NSAllowsArbitraryLoadsInWebContent</key>
 		<true/>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>프로필 이미지 및 아트워크 업로드를 위해 미디어를 사용합니다</string>
+	<key>NSCameraUsageDescription</key>
+	<string>프로필 이미지 및 아트워크 업로드를 위해 카메라를 사용합니다</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>프로필 이미지 및 아트워크 업로드를 위해 미디어를 사용합니다</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>앱이 타겟광고게재 추적 목적으로 IDFA에 접근하려고 합니다.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -40,16 +48,14 @@
 		<string>armv7</string>
 	</array>
 	<key>UIStatusBarHidden</key>
-	<false/>
+	<true/>
 	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleDefault</string>
+	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>프로필 이미지 및 아트워크 업로드를 위해 카메라를 사용합니다</string>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>프로필 이미지 및 아트워크 업로드를 위해 미디어를 사용합니다</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true/>
 </dict>
 </plist>

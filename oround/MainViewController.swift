@@ -8,35 +8,49 @@
 import UIKit
 import WebKit
 //import Promises
+import AppTrackingTransparency
+import AdSupport
 
 class MainViewController: UIViewController,
                           WKNavigationDelegate,
                           WKUIDelegate {
     
-    // Viewx
+    // View
     var mainWebView: WKWebView!
     var popupWebView: WKWebView?
     let popupViewContentController = WKUserContentController()
     
+
     lazy var button: UIButton = {
-        let button = UIButton(frame: CGRect(x:100,
-                                            y:self.view.frame.maxX - 60,
+        let button = UIButton(frame: CGRect(x:30,
+                                            y:45,
                                             width:50,
                                             height:50))
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        button.setImage(UIImage(named:"x"), for: .normal)// 이미지 넣기
+//        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named:"x2"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.contentHorizontalAlignment = .center
-        button.semanticContentAttribute = .forceRightToLeft //<- 중요
-        
-        button.imageEdgeInsets = .init(top: 0, left: 15, bottom: 0, right: 15) //<- 중요
+        button.semanticContentAttribute = .forceRightToLeft
+        button.imageEdgeInsets = .init(top: 0, left: 15, bottom: 0, right: 15)
         return button
     }()
     
-    
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        // Create an indicator.
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x: view.frame.maxX/2, y: view.frame.maxY/2, width: 50, height: 50)
+        activityIndicator.center = self.view.center
+        activityIndicator.color = UIColor.red
+        // Also show the indicator even when the animation is stopped.
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = UIActivityIndicatorView.Style.white
+        // Start animation.
+        activityIndicator.stopAnimating()
+        return activityIndicator }()
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     // LoadView
     override func loadView() {
         let preferences = WKPreferences()
@@ -79,10 +93,29 @@ class MainViewController: UIViewController,
         
         setupLayout()
         
-        popupWebView?.addSubview(button)
+        // Ask Tracking Permission
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization { status in
+                switch status {
+                case .authorized:
+                    print("Authorized")
+                    print(ASIdentifierManager.shared().advertisingIdentifier)
+                case .denied:
+                    print("Denied")
+                case .notDetermined:
+                    print("Not Determined")
+                case .restricted:
+                    print("Restricted")
+                @unknown default:
+                    print("Unknown")
+                }
+            }
+        }
     }
     
-    // Setup
+    /**********
+     * Setup UI
+     */
     func setupLayout() {
         let url = URL(string: "https://www.oround.com")!
         mainWebView.load(URLRequest(url: url))
@@ -90,8 +123,16 @@ class MainViewController: UIViewController,
         mainWebView.configuration.preferences.javaScriptCanOpenWindowsAutomatically = true
     }
     
+    @objc func timerFired() {
+        popupWebView?.layer.opacity = 1.0
+        activityIndicator.stopAnimating()
+    }
+
+    /**********
+     * Alert
+     */
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
-        let alertController = UIAlertController(title: "test", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Oround", message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "확인", style: .cancel) { _ in
             completionHandler()
         }
@@ -101,6 +142,9 @@ class MainViewController: UIViewController,
         }
     }
     
+    /**********
+     * Confirm
+     */
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
         let alertController = UIAlertController(title: "test", message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
@@ -116,14 +160,14 @@ class MainViewController: UIViewController,
         }
     }
     
-    
-    /**
-     * POPUP Window
+    /**********
+     * Popup
      */
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures)
     -> WKWebView? {
         let userController = WKUserContentController()
         userController.add(self, name: "oround")
+        userController.add(self, name: "setting")
         configuration.userContentController = userController
         configuration.applicationNameForUserAgent = "Version/8.0.2 Safari/600.2.5"
         
@@ -131,18 +175,26 @@ class MainViewController: UIViewController,
         popupWebView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         popupWebView?.navigationDelegate = self
         popupWebView?.uiDelegate = self
+        popupWebView?.addSubview(button)
+        popupWebView?.addSubview(activityIndicator)
+    
         
+        debugPrint("FRAME : \(button.frame)")
         view.addSubview(popupWebView!)
         return popupWebView!
     }
     
-    
-    fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-        return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+    func webView(_ webView:WKWebView, didFinish navigation:WKNavigation!) {
+//        timer.invalidate()
+        popupWebView?.layer.opacity = 1.0
+        activityIndicator.stopAnimating()
     }
 
+  
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
+    func webView(_ webView: WKWebView,
+                 decidePolicyFor navigationAction: WKNavigationAction,
+                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         print("@@@  decidePolicyFor navigationAction")
         guard let requestURL = navigationAction.request.url else {return}
         let url = requestURL.absoluteString
@@ -157,14 +209,19 @@ class MainViewController: UIViewController,
         }
 #if DEBUG
         print("=====>url = \(url), host = \(hostAddress?.description ?? "")")
+        
 #endif
+        popupWebView?.layer.opacity = 0.8
+        activityIndicator.startAnimating()
+        var timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(timerFired), userInfo: nil, repeats: false)
         let url_elements = url.components(separatedBy: ":")
         if url_elements[0].contains("http") == false &&
             url_elements[0].contains("https") == false {
             
             if UIApplication.shared.canOpenURL(requestURL) {
                 UIApplication.shared.open(requestURL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
-            } else {    // 만약  Info.plist의 white list에 등록되지 않은 앱 스키마가 있는 경우를 위해 사용, 신용카드 결제화면등을 위해 필요, 해당 결제앱 스키마 호출
+            } else {
+                // 만약  Info.plist의 white list에 등록되지 않은 앱 스키마가 있는 경우를 위해 사용, 신용카드 결제화면등을 위해 필요, 해당 결제앱 스키마 호출
                 if url.contains("about:blank") == true {
                     print("@@@ Browser can't be opened, about:blank !! @@@")
                 }else{
@@ -182,6 +239,9 @@ class MainViewController: UIViewController,
         
     }
     
+    fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+        return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+    }
     
     
     
@@ -198,8 +258,11 @@ class MainViewController: UIViewController,
             debugPrint("buttonTime")
             if let popupWebView = self.popupWebView {
                 popupWebView.removeFromSuperview()
+                
             }
-            
+//            let vc = SettingModalViewController()
+//            vc.modalPresentationStyle = .overCurrentContext
+//            self.present(vc, animated: true)
         }
     }
 }
@@ -222,24 +285,22 @@ class MainViewController: UIViewController,
 extension MainViewController : WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         
-        guard let bodyString = message.body as? [String: String] else { return }
-        
-        if let token = bodyString["token"] {
-            debugPrint("RECEIVED**************\(token)")
-            mainWebView.evaluateJavaScript(
-                "window.postMessage({\"token\":\"\(token)\"});"
-                , completionHandler: nil)
-            if let popupWebView = self.popupWebView {
-                popupWebView.removeFromSuperview()
+        if ( message.name=="oround" ) {
+            guard let bodyString = message.body as? [String: String] else { return }
+            if let token = bodyString["token"] {
+                debugPrint("RECEIVED**************\(token)")
+                mainWebView.evaluateJavaScript(
+                    "window.postMessage({\"token\":\"\(token)\"});"
+                    , completionHandler: nil)
+                if let popupWebView = self.popupWebView {
+                    popupWebView.removeFromSuperview()
+                }
             }
+        } else if ( message.name=="setting" ) {
+            let vc = SettingModalViewController()
+            vc.modalPresentationStyle = .overCurrentContext
+            self.present(vc, animated: true)
         }
-        
-        
     }
 }
-class JsonItem: NSObject {
-    var token = ""
-    var value = ""
-}
-
 

@@ -15,6 +15,8 @@
 		A952E740276DAA3C00710434 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A952E73F276DAA3C00710434 /* WelcomeViewController.swift */; };
 		A952E745276EBF7000710434 /* oround.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A952E744276EBF7000710434 /* oround.xcassets */; };
 		A952E747276EC62D00710434 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = A952E746276EC62D00710434 /* Podfile */; };
+		A9CB0C062773827000B438F1 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CB0C052773827000B438F1 /* UIApplication.swift */; };
+		A9CB0C0A2773A23C00B438F1 /* SettingModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CB0C092773A23C00B438F1 /* SettingModalViewController.swift */; };
 		A9D7A6652770B89C00094E55 /* finger.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9D7A6632770B84700094E55 /* finger.xcframework */; };
 		A9D7A6662770B89C00094E55 /* finger.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9D7A6632770B84700094E55 /* finger.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9D7A6702770CB7E00094E55 /* OroundPageContol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D7A66F2770CB7E00094E55 /* OroundPageContol.swift */; };
@@ -48,6 +50,8 @@
 		A952E73F276DAA3C00710434 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		A952E744276EBF7000710434 /* oround.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = oround.xcassets; sourceTree = "<group>"; };
 		A952E746276EC62D00710434 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A9CB0C052773827000B438F1 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		A9CB0C092773A23C00B438F1 /* SettingModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingModalViewController.swift; sourceTree = "<group>"; };
 		A9D7A6632770B84700094E55 /* finger.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = finger.xcframework; sourceTree = "<group>"; };
 		A9D7A6682770B8CB00094E55 /* oround.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = oround.entitlements; sourceTree = "<group>"; };
 		A9D7A66A2770BEF800094E55 /* oround-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "oround-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 		5A9B92E5248A2EB800B88C61 /* oround */ = {
 			isa = PBXGroup;
 			children = (
+				A9CB0C042773825E00B438F1 /* Extensions */,
 				A9D7A66E2770CB5800094E55 /* Components */,
 				A9D7A6682770B8CB00094E55 /* oround.entitlements */,
 				A952E743276EBF4000710434 /* Resources */,
@@ -125,9 +130,18 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		A9CB0C042773825E00B438F1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A9CB0C052773827000B438F1 /* UIApplication.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		A9D7A66E2770CB5800094E55 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A9CB0C092773A23C00B438F1 /* SettingModalViewController.swift */,
 				A9D7A66F2770CB7E00094E55 /* OroundPageContol.swift */,
 			);
 			path = Components;
@@ -263,6 +277,8 @@
 				A9D7A6702770CB7E00094E55 /* OroundPageContol.swift in Sources */,
 				A952E740276DAA3C00710434 /* WelcomeViewController.swift in Sources */,
 				5A9B92E9248A2EB800B88C61 /* MainViewController.swift in Sources */,
+				A9CB0C062773827000B438F1 /* UIApplication.swift in Sources */,
+				A9CB0C0A2773A23C00B438F1 /* SettingModalViewController.swift in Sources */,
 				5A9B92E7248A2EB800B88C61 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,7 +432,7 @@
 				CODE_SIGN_ENTITLEMENTS = oround/oround.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = U5K7UFZ43J;
 				INFOPLIST_FILE = oround/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -442,7 +458,7 @@
 				CODE_SIGN_ENTITLEMENTS = oround/oround.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = U5K7UFZ43J;
 				INFOPLIST_FILE = oround/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
