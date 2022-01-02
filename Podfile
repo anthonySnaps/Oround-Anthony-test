@@ -5,6 +5,7 @@ def shard_pods
   pod 'SwiftPromises'
   pod 'FirebaseCore'
   pod 'FirebaseMessaging'
+  pod 'FirebaseAnalytics'
 end
 
 target 'oround' do
