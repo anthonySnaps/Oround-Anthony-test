@@ -20,6 +20,8 @@
 		A9D7A6652770B89C00094E55 /* finger.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9D7A6632770B84700094E55 /* finger.xcframework */; };
 		A9D7A6662770B89C00094E55 /* finger.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9D7A6632770B84700094E55 /* finger.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9D7A6702770CB7E00094E55 /* OroundPageContol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D7A66F2770CB7E00094E55 /* OroundPageContol.swift */; };
+		A9E2321927817ABA00A863B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9E2321827817ABA00A863B1 /* GoogleService-Info.plist */; };
+		A9E232242781B8B700A863B1 /* fingerNotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E232222781B8B700A863B1 /* fingerNotificationService.m */; };
 		E4BA33ED1377CD27CD0F81B8 /* Pods_oround.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FA1900B5296D62B1C120958 /* Pods_oround.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,9 @@
 		A9D7A66A2770BEF800094E55 /* oround-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "oround-Bridging-Header.h"; sourceTree = "<group>"; };
 		A9D7A66B2770BEF800094E55 /* oround.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = oround.h; sourceTree = "<group>"; };
 		A9D7A66F2770CB7E00094E55 /* OroundPageContol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OroundPageContol.swift; sourceTree = "<group>"; };
+		A9E2321827817ABA00A863B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A9E232222781B8B700A863B1 /* fingerNotificationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fingerNotificationService.m; sourceTree = "<group>"; };
+		A9E232232781B8B700A863B1 /* fingerNotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fingerNotificationService.h; sourceTree = "<group>"; };
 		EE4C93DBF2FF5339290BF7B8 /* Pods-oround.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oround.debug.xcconfig"; path = "Target Support Files/Pods-oround/Pods-oround.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				A9D7A66B2770BEF800094E55 /* oround.h */,
+				A9E2321827817ABA00A863B1 /* GoogleService-Info.plist */,
 				5A9B92E5248A2EB800B88C61 /* oround */,
 				97FC189B05649631570EC25D /* Pods */,
 				F9F00510A299D8E09CC7367A /* Frameworks */,
@@ -96,6 +102,7 @@
 		5A9B92E5248A2EB800B88C61 /* oround */ = {
 			isa = PBXGroup;
 			children = (
+				A9E232212781B8B700A863B1 /* NoticationService */,
 				A9CB0C042773825E00B438F1 /* Extensions */,
 				A9D7A66E2770CB5800094E55 /* Components */,
 				A9D7A6682770B8CB00094E55 /* oround.entitlements */,
@@ -147,6 +154,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		A9E232212781B8B700A863B1 /* NoticationService */ = {
+			isa = PBXGroup;
+			children = (
+				A9E232222781B8B700A863B1 /* fingerNotificationService.m */,
+				A9E232232781B8B700A863B1 /* fingerNotificationService.h */,
+			);
+			path = NoticationService;
+			sourceTree = "<group>";
+		};
 		F9F00510A299D8E09CC7367A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +191,8 @@
 			dependencies = (
 			);
 			name = oround;
+			packageProductDependencies = (
+			);
 			productName = wkwebview;
 			productReference = 5A9B92E3248A2EB800B88C61 /* oround.app */;
 			productType = "com.apple.product-type.application";
@@ -203,6 +221,8 @@
 				Base,
 			);
 			mainGroup = 5A9B92DA248A2EB800B88C61;
+			packageReferences = (
+			);
 			productRefGroup = 5A9B92E4248A2EB800B88C61 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -222,6 +242,7 @@
 				5A9B92EE248A2EBA00B88C61 /* Assets.xcassets in Resources */,
 				A952E745276EBF7000710434 /* oround.xcassets in Resources */,
 				5A9B92EC248A2EB800B88C61 /* Main.storyboard in Resources */,
+				A9E2321927817ABA00A863B1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +301,7 @@
 				A9CB0C062773827000B438F1 /* UIApplication.swift in Sources */,
 				A9CB0C0A2773A23C00B438F1 /* SettingModalViewController.swift in Sources */,
 				5A9B92E7248A2EB800B88C61 /* AppDelegate.swift in Sources */,
+				A9E232242781B8B700A863B1 /* fingerNotificationService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,18 +452,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = oround/oround.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 11;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = U5K7UFZ43J;
 				INFOPLIST_FILE = oround/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snaps.oround;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = AppStoreOround;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "oround-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -456,18 +479,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = oround/oround.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 11;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = U5K7UFZ43J;
 				INFOPLIST_FILE = oround/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snaps.oround;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = AppStoreOround;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "oround-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

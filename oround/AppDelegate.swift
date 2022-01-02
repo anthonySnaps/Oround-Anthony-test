@@ -9,39 +9,36 @@ import UIKit
 import UserNotifications
 import AVFoundation
 import Photos
+import FirebaseCore
+import FirebaseMessaging
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     var window: UIWindow?
+    private let fingerManager = finger.sharedData()
+    private var fcmRegTokenMessage = ""
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
+        Messaging.messaging().delegate = self
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = WelcomeViewController()
         self.window?.makeKeyAndVisible()
         UINavigationBar.appearance().barStyle = .blackTranslucent
-
-//        let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-//        statusBar?.backgroundColor = .red
-        //        finger.sharedData().setAppKey("0XfPGBluVrj2GB8KkHu1zQ==")
-        //        finger.sharedData().setAppScrete("ysOi9rG0TArxc2vpxrWxdkTQm9EdIKWb0vk2ZQQBDrcZZtDfGQd500srQr5+W3Ij")
         
+        //        registerForPushNotifications()
         
+        registeredForRemoteNotifications(application: application)
+        //핑거 푸시 sdk 버전
+        print("FINGER SDK : " + finger.getSdkVer())
         
-        
-        registerForPushNotifications()
+        /*핑거 푸시*/
         
         finger.sharedData().setAppKey("a5dWGhJjqYPm")
         finger.sharedData().setAppScrete("zzcU63y49pcRyHcn8dAC3vi46lhCK4t8")
         
-        //Camera
-        //         AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
-        //             if response {
-        //                 //access granted
-        //             } else {
-        //
-        //             }
-        //         }
         
         
         //Photos
@@ -49,17 +46,148 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if photos == .notDetermined {
             PHPhotoLibrary.requestAuthorization({status in
                 if status == .authorized{
-                    
-                } else {}
+                    print("PHOTO AUTHORIZED")
+                } else {
+                    print("PHOTO UNAUTHORIZED")
+                }
             })
         }
         
         return true
     }
     
+    
+    
+    //MARK: - 푸시 등록
+    func registeredForRemoteNotifications(application: UIApplication) {
+        // Firebase
+        
+        
+        
+        // APNS
+#if !targetEnvironment(simulator)
+        
+        if #available(iOS 10.0, *) {
+            
+            let center = UNUserNotificationCenter.current()
+            center.delegate = self
+            // 카테고리를 이용한 NotificationAction
+            //payload category 는 fp (이미지가 있을 경우 fp가 자동으로 함께 전송됩니다.)
+            /*
+             let acceptAction = UNNotificationAction(identifier: "com.kissoft.yes", title: "확인", options: .foreground)
+             let declineAction = UNNotificationAction(identifier: "com.kissoft.no", title: "닫기", options: .destructive)
+             let category = UNNotificationCategory(identifier: "fp", actions: [acceptAction,declineAction], intentIdentifiers: [], options: .customDismissAction)
+             center.setNotificationCategories([category])
+             */
+            center.requestAuthorization(options: [.alert,.badge,.sound], completionHandler: { (granted, error) in
+                print("granted : \(granted) / error : \(String(describing: error))")
+                DispatchQueue.main.async(execute: {
+                    application.registerForRemoteNotifications()
+                })
+            })
+        }
+#endif
+    }
+    
+    /**
+     * Device Token은 Finger로 보내주자
+     */
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
+        print("DeviceToken: \(deviceTokenString)")
+        
+        fingerManager?.registerUser(withBlock: deviceToken, { (posts, error) -> Void in
+            print("finger token : " + ((self.fingerManager?.getToken()) ?? "없음"))
+            print("finger DeviceIdx : " + ((self.fingerManager?.getDeviceIdx()) ?? "없음"))
+            print("posts: \(String(describing: posts)) error: \(String(describing: error))")
+        })
+        Messaging.messaging().apnsToken = deviceToken
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print("Error fetching FCM registration token: \(error)")
+            } else if let token = token {
+                print("FCM registration token: \(token)")
+                self.fcmRegTokenMessage  = "Remote FCM registration token: \(token)"
+            }
+        }
+        
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification
+                     userInfo: [AnyHashable: Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        if let dicAps = userInfo["aps"] as? Dictionary<String,Any> {
+            if let ca = dicAps["content-available"] {
+                if ca as! Int == 1 {
+                    //사일런트 푸시일 경우 처리
+                    completionHandler(UIBackgroundFetchResult.newData)
+                    return
+                }
+            }
+        }
+        /*핑거푸시 읽음처리*/
+        checkPush(userInfo)
+        completionHandler(UIBackgroundFetchResult.noData)
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("\(error)")
+    }
+    
+    //MARK: - 푸시 얼럿
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions)
+                                -> Void) {
+        let userInfo = notification.request.content.userInfo
+        
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        // [START_EXCLUDE]
+        // Print message ID.
+        if let messageID = userInfo[fcmRegTokenMessage] {
+            print("Message ID: \(messageID)")
+        }
+        // [END_EXCLUDE]
+        // Print full message.
+        print(userInfo)
+        completionHandler([.alert,.sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping ()
+                                -> Void) {
+        
+        let userInfo = response.notification.request.content.userInfo
+        
+        // [START_EXCLUDE]
+        // Print message ID.
+        if let messageID = userInfo[fcmRegTokenMessage] {
+            print("Message ID: \(messageID)")
+        }
+        // [END_EXCLUDE]
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        // Print full message.
+        print(userInfo)
+        
+        /*핑거푸시 읽음처리*/
+        checkPush(userInfo)
+        
+        //        let strAction = response.actionIdentifier
+        //        print(strAction)
+        //        if strAction.contains("yes") || strAction.contains("UNNotificationDefaultActionIdentifier") {
+        //            showPopUp(userInfo: userInfo)
+        //        }
+        
+        completionHandler()
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -68,7 +196,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -79,80 +207,66 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func registerForPushNotifications() {
-        UNUserNotificationCenter.current()
-            .requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
-                print("Permission granted: \(granted)")
-            }
+    //MARK: -
+    func showPopUp(userInfo:[AnyHashable: Any]){
+        
+        //        var topRootViewController = UIApplication.shared.keyWindow!.rootViewController
+        //
+        //        while topRootViewController!.presentedViewController != nil
+        //        {
+        //            topRootViewController = topRootViewController!.presentedViewController
+        //        }
+        //
+        //        if topRootViewController!.isKind(of: UINavigationController.self){
+        //
+        //            let root = (topRootViewController as! UINavigationController).viewControllers.first
+        //
+        //            if root!.isKind(of: PopUpTableViewController.self){
+        //
+        //                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        //                let child = mainStoryboard.instantiateViewController(withIdentifier: "PopUpTableViewController") as! PopUpTableViewController
+        //                child.dicData = userInfo as [NSObject : AnyObject]?
+        //                (topRootViewController as! UINavigationController).pushViewController(child, animated: false)
+        //
+        //            }
+        //
+        //        } else if topRootViewController!.isKind(of: TabBarController.self){
+        //
+        //            (topRootViewController as! TabBarController).showPopUp(userInfo)
+        //
+        //        }
+        
     }
     
-    //    //메세지 오픈 및 읽음 처리
-    //    func application:(_ application: UIApplication,
-    //        didReceiveRemoteNotification:(NSDictionary *)userInfo
-    //                      fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
-    //        //참고 : 메세지 정보 확인
-    //        NSDictionary* dicCode = [finger receviveCode:userInfo];
-    //        NSString *strPT = [dicCode objectForKey:@"PT"]; //메세지타입 - DEFT(일반) , STOS (서버투서버), LNGT(롱푸시)
-    //        NSString *strIM = [dicCode objectForKey:@"IM"]; //이미지 여부 (0: 이미지 미포함 , 1: 이미지 포함)
-    //        NSString *strWL = [dicCode objectForKey:@"WL"]; //웹링크 여부 (0: 웹링크 미포함 , 1: 웹링크 포함)
-    //
-    //       //메세지 읽음 처리
-    //       [[finger sharedData]  requestPushCheckWithBlock:userInfo :^(NSString *posts, NSError *error) {
-    //          if (!error) {
-    //              NSLog(@"check : %@", posts);
-    //          }else{
-    //              NSLog(@"check error %@", error);
-    //          }
-    //      )];
-    //    }
-    
-    func application(_ application: UIApplication,
-                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        //핑거푸시의 모든 api를 사용하기 위해서 기기등록 우선
-        var token: String = ""
-        for i in 0..<deviceToken.count { token += String(format: "%02.2hhx", deviceToken[i] as CVarArg) }
+    //MARK: - 푸시 오픈 체크
+    func checkPush(_ UserInfo : [AnyHashable : Any]){
         
+        finger.sharedData().requestPushCheck(withBlock: UserInfo , { (posts, error) -> Void in
+            
+            print("posts: \(String(describing: posts)) error: \(String(describing: error))")
+            
+        })
     }
     
     
 }
 
-//extension UINavigationController {
-//
-//    func setStatusBar(backgroundColor: UIColor) {
-//        let statusBarFrame: CGRect
-//        if #available(iOS 13.0, *) {
-//            statusBarFrame = view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
-//        } else {
-//            statusBarFrame = UIApplication.shared.statusBarFrame
-//        }
-//        let statusBarView = UIView(frame: statusBarFrame)
-//        statusBarView.backgroundColor = backgroundColor
-//        view.addSubview(statusBarView)
-//    }
-//
-//}
 
 
-//extension UIApplication {
-//var statusBarUIView: UIView? {
-//    if #available(iOS 13.0, *) {
-//        let tag = 38482
-//        let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-//
-//        if let statusBar = keyWindow?.viewWithTag(tag) {
-//            return statusBar
-//        } else {
-//            guard let statusBarFrame = keyWindow?.windowScene?.statusBarManager?.statusBarFrame else { return nil }
-//            let statusBarView = UIView(frame: statusBarFrame)
-//            statusBarView.tag = tag
-//            keyWindow?.addSubview(statusBarView)
-//            return statusBarView
-//        }
-//    } else if responds(to: Selector(("statusBar"))) {
-//        return value(forKey: "statusBar") as? UIView
-//    } else {
-//        return nil
-//    }
-//  }
-//}
+extension AppDelegate: MessagingDelegate {
+    // [START refresh_token]
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("Firebase registration token: \(String(describing: fcmToken))")
+        
+        let dataDict: [String: String] = ["token": fcmToken ?? ""]
+        NotificationCenter.default.post(
+            name: Notification.Name("FCMToken"),
+            object: nil,
+            userInfo: dataDict
+        )
+        // TODO: If necessary send token to application server.
+        // Note: This callback is fired at each app startup and whenever a new token is generated.
+    }
+    
+    // [END refresh_token]
+}

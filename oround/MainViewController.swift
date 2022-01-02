@@ -47,9 +47,11 @@ class MainViewController: UIViewController,
         activityIndicator.style = UIActivityIndicatorView.Style.white
         // Start animation.
         activityIndicator.stopAnimating()
-        return activityIndicator }()
+        return activityIndicator
+    }()
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return .default
     }
     // LoadView
     override func loadView() {
@@ -66,21 +68,24 @@ class MainViewController: UIViewController,
         
         view = mainWebView
         
-        // 1.
+//        // 1.
         if #available(iOS 13.0, *) {
-            
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
             let margin = view.layoutMarginsGuide
             let statusbarView = UIView()
             statusbarView.backgroundColor = .white
             statusbarView.frame = CGRect.zero
             view.addSubview(statusbarView)
             statusbarView.translatesAutoresizingMaskIntoConstraints = false
-            
+
             NSLayoutConstraint.activate([
                 statusbarView.topAnchor.constraint(equalTo: view.topAnchor),
                 statusbarView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1.0),
                 statusbarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 statusbarView.bottomAnchor.constraint(equalTo: margin.topAnchor)
+                
             ])
         } else {
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
@@ -258,27 +263,10 @@ class MainViewController: UIViewController,
             debugPrint("buttonTime")
             if let popupWebView = self.popupWebView {
                 popupWebView.removeFromSuperview()
-                
             }
-//            let vc = SettingModalViewController()
-//            vc.modalPresentationStyle = .overCurrentContext
-//            self.present(vc, animated: true)
         }
     }
 }
-
-
-//var jsonStringToDictionary: [String: AnyObject]? {
-//    if let data = data(using: String.Encoding.utf8) {
-//        do {
-//            return try JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject]
-//
-//        } catch let error as NSError {
-//            print(error)
-//        }
-//    }
-//    return nil
-//}
 
 
 

@@ -88,6 +88,10 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         return indicatorView
     }()
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
     lazy var scrollView: UIScrollView = {
         // Create a UIScrollView.
         let scrollView = UIScrollView(frame: self.view.frame)

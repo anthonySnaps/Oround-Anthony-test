@@ -3,6 +3,8 @@ platform :ios, '12.0'
 def shard_pods
   pod 'SnapKit','~> 5.0.1'
   pod 'SwiftPromises'
+  pod 'FirebaseCore'
+  pod 'FirebaseMessaging'
 end
 
 target 'oround' do
