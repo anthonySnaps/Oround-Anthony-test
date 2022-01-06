@@ -4,6 +4,7 @@
 //
 //  Created by thinoo on 2021/12/23.
 //
+import UIKit
 
 extension UIApplication {
     struct Constants {

@@ -65,7 +65,8 @@ class MainViewController: UIViewController,
         mainWebView = WKWebView()
         mainWebView.navigationDelegate = self
         mainWebView.uiDelegate = self
-        
+        mainWebView.layoutMargins = UIEdgeInsets.init(top:0, left:0, bottom:30, right:0);
+
         view = mainWebView
         
 //        // 1.
@@ -122,10 +123,13 @@ class MainViewController: UIViewController,
      * Setup UI
      */
     func setupLayout() {
-        let url = URL(string: "https://www.oround.com")!
-        mainWebView.load(URLRequest(url: url))
-        mainWebView.allowsBackForwardNavigationGestures = true
-        mainWebView.configuration.preferences.javaScriptCanOpenWindowsAutomatically = true
+        if let urlString = Bundle.main.object(forInfoDictionaryKey: "OROUND_URL") as? String {
+            let url = URL(string: urlString)!
+            mainWebView.load(URLRequest(url: url))
+            mainWebView.allowsBackForwardNavigationGestures = true
+            mainWebView.configuration.preferences.javaScriptCanOpenWindowsAutomatically = true
+        }
+
     }
     
     @objc func timerFired() {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,29 +15,13 @@
 		A952E740276DAA3C00710434 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A952E73F276DAA3C00710434 /* WelcomeViewController.swift */; };
 		A952E745276EBF7000710434 /* oround.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A952E744276EBF7000710434 /* oround.xcassets */; };
 		A952E747276EC62D00710434 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = A952E746276EC62D00710434 /* Podfile */; };
+		A9CA14B727857E9F00872C80 /* finger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A67F2127856EE400AA547B /* finger.framework */; };
 		A9CB0C062773827000B438F1 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CB0C052773827000B438F1 /* UIApplication.swift */; };
 		A9CB0C0A2773A23C00B438F1 /* SettingModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CB0C092773A23C00B438F1 /* SettingModalViewController.swift */; };
-		A9D7A6652770B89C00094E55 /* finger.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9D7A6632770B84700094E55 /* finger.xcframework */; };
-		A9D7A6662770B89C00094E55 /* finger.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9D7A6632770B84700094E55 /* finger.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9D7A6702770CB7E00094E55 /* OroundPageContol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D7A66F2770CB7E00094E55 /* OroundPageContol.swift */; };
 		A9E2321927817ABA00A863B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9E2321827817ABA00A863B1 /* GoogleService-Info.plist */; };
-		A9E232242781B8B700A863B1 /* fingerNotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E232222781B8B700A863B1 /* fingerNotificationService.m */; };
 		E4BA33ED1377CD27CD0F81B8 /* Pods_oround.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FA1900B5296D62B1C120958 /* Pods_oround.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		A9D7A6672770B89C00094E55 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				A9D7A6662770B89C00094E55 /* finger.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4E91F1ECD5EB2BF2810C3F2F /* Pods-oround.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oround.release.xcconfig"; path = "Target Support Files/Pods-oround/Pods-oround.release.xcconfig"; sourceTree = "<group>"; };
@@ -52,16 +36,15 @@
 		A952E73F276DAA3C00710434 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		A952E744276EBF7000710434 /* oround.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = oround.xcassets; sourceTree = "<group>"; };
 		A952E746276EC62D00710434 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A9A67F2127856EE400AA547B /* finger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = finger.framework; sourceTree = "<group>"; };
+		A9B296F12786946A006CE5B9 /* oround copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "oround copy-Info.plist"; path = "/Users/thinoo/works/oround/oround.ios/oround copy-Info.plist"; sourceTree = "<absolute>"; };
 		A9CB0C052773827000B438F1 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		A9CB0C092773A23C00B438F1 /* SettingModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingModalViewController.swift; sourceTree = "<group>"; };
-		A9D7A6632770B84700094E55 /* finger.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = finger.xcframework; sourceTree = "<group>"; };
 		A9D7A6682770B8CB00094E55 /* oround.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = oround.entitlements; sourceTree = "<group>"; };
 		A9D7A66A2770BEF800094E55 /* oround-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "oround-Bridging-Header.h"; sourceTree = "<group>"; };
 		A9D7A66B2770BEF800094E55 /* oround.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = oround.h; sourceTree = "<group>"; };
 		A9D7A66F2770CB7E00094E55 /* OroundPageContol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OroundPageContol.swift; sourceTree = "<group>"; };
 		A9E2321827817ABA00A863B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		A9E232222781B8B700A863B1 /* fingerNotificationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fingerNotificationService.m; sourceTree = "<group>"; };
-		A9E232232781B8B700A863B1 /* fingerNotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fingerNotificationService.h; sourceTree = "<group>"; };
 		EE4C93DBF2FF5339290BF7B8 /* Pods-oround.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oround.debug.xcconfig"; path = "Target Support Files/Pods-oround/Pods-oround.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,8 +53,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9D7A6652770B89C00094E55 /* finger.xcframework in Frameworks */,
 				E4BA33ED1377CD27CD0F81B8 /* Pods_oround.framework in Frameworks */,
+				A9CA14B727857E9F00872C80 /* finger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +70,7 @@
 				97FC189B05649631570EC25D /* Pods */,
 				F9F00510A299D8E09CC7367A /* Frameworks */,
 				A9D7A66A2770BEF800094E55 /* oround-Bridging-Header.h */,
+				A9B296F12786946A006CE5B9 /* oround copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,7 +86,6 @@
 		5A9B92E5248A2EB800B88C61 /* oround */ = {
 			isa = PBXGroup;
 			children = (
-				A9E232212781B8B700A863B1 /* NoticationService */,
 				A9CB0C042773825E00B438F1 /* Extensions */,
 				A9D7A66E2770CB5800094E55 /* Components */,
 				A9D7A6682770B8CB00094E55 /* oround.entitlements */,
@@ -154,19 +137,10 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		A9E232212781B8B700A863B1 /* NoticationService */ = {
-			isa = PBXGroup;
-			children = (
-				A9E232222781B8B700A863B1 /* fingerNotificationService.m */,
-				A9E232232781B8B700A863B1 /* fingerNotificationService.h */,
-			);
-			path = NoticationService;
-			sourceTree = "<group>";
-		};
 		F9F00510A299D8E09CC7367A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A9D7A6632770B84700094E55 /* finger.xcframework */,
+				A9A67F2127856EE400AA547B /* finger.framework */,
 				7FA1900B5296D62B1C120958 /* Pods_oround.framework */,
 			);
 			name = Frameworks;
@@ -184,7 +158,7 @@
 				5A9B92E0248A2EB800B88C61 /* Frameworks */,
 				5A9B92E1248A2EB800B88C61 /* Resources */,
 				7E228A1DBC2A9209AA1CA392 /* [CP] Embed Pods Frameworks */,
-				A9D7A6672770B89C00094E55 /* Embed Frameworks */,
+				A9A67F252785703E00AA547B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -288,6 +262,25 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-oround/Pods-oround-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A9A67F252785703E00AA547B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -301,7 +294,6 @@
 				A9CB0C062773827000B438F1 /* UIApplication.swift in Sources */,
 				A9CB0C0A2773A23C00B438F1 /* SettingModalViewController.swift in Sources */,
 				5A9B92E7248A2EB800B88C61 /* AppDelegate.swift in Sources */,
-				A9E232242781B8B700A863B1 /* fingerNotificationService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,9 +355,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -425,9 +418,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -454,12 +448,22 @@
 				CODE_SIGN_ENTITLEMENTS = oround/oround.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = U5K7UFZ43J;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = oround/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${DT_TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}\"",
+					/usr/lib/swift,
+					"$(PROJECT_DIR)/**",
 				);
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snaps.oround;
@@ -469,6 +473,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};
@@ -481,12 +486,22 @@
 				CODE_SIGN_ENTITLEMENTS = oround/oround.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = U5K7UFZ43J;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = oround/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${DT_TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}\"",
+					/usr/lib/swift,
+					"$(PROJECT_DIR)/**",
 				);
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snaps.oround;
@@ -495,6 +510,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "oround-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};

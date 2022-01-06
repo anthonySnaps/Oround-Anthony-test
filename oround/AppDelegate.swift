@@ -96,10 +96,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
         print("DeviceToken: \(deviceTokenString)")
         
-        fingerManager?.registerUser(withBlock: deviceToken, { (posts, error) -> Void in
-            print("finger token : " + ((self.fingerManager?.getToken()) ?? "없음"))
-            print("finger DeviceIdx : " + ((self.fingerManager?.getDeviceIdx()) ?? "없음"))
-            print("posts: \(String(describing: posts)) error: \(String(describing: error))")
+        finger.sharedData()?.registerUser(withBlock: deviceToken, { (posts, error) -> Void in
+            print("@@@finger token : " + ((finger.sharedData()?.getToken()) ?? "없음"))
+            print("@@@finger DeviceIdx : " + ((finger.sharedData()?.getDeviceIdx()) ?? "없음"))
+            print("@@@posts: \(String(describing: posts)) error: \(String(describing: error))")
         })
         Messaging.messaging().apnsToken = deviceToken
         Messaging.messaging().token { token, error in
@@ -243,7 +243,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         finger.sharedData().requestPushCheck(withBlock: UserInfo , { (posts, error) -> Void in
             
-            print("posts: \(String(describing: posts)) error: \(String(describing: error))")
+            print("###posts: \(String(describing: posts)) error: \(String(describing: error))")
             
         })
     }
