@@ -41,6 +41,8 @@
 	<string>프로필 이미지 및 아트워크 업로드를 위해 미디어를 사용합니다</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>앱이 타겟광고게재 추적 목적으로 IDFA에 접근하려고 합니다.</string>
+	<key>OROUND_URL</key>
+	<string>${OROUND_URL}</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
@@ -63,7 +65,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>OROUND_URL</key>
-	<string>${OROUND_URL}</string>
 </dict>
 </plist>

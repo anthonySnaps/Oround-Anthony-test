@@ -22,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
-        
+        Thread.sleep(forTimeInterval: 3.0)
+
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = WelcomeViewController()
         self.window?.makeKeyAndVisible()

@@ -37,7 +37,6 @@
 		A952E744276EBF7000710434 /* oround.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = oround.xcassets; sourceTree = "<group>"; };
 		A952E746276EC62D00710434 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A9A67F2127856EE400AA547B /* finger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = finger.framework; sourceTree = "<group>"; };
-		A9B296F12786946A006CE5B9 /* oround copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "oround copy-Info.plist"; path = "/Users/thinoo/works/oround/oround.ios/oround copy-Info.plist"; sourceTree = "<absolute>"; };
 		A9CB0C052773827000B438F1 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		A9CB0C092773A23C00B438F1 /* SettingModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingModalViewController.swift; sourceTree = "<group>"; };
 		A9D7A6682770B8CB00094E55 /* oround.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = oround.entitlements; sourceTree = "<group>"; };
@@ -70,7 +69,6 @@
 				97FC189B05649631570EC25D /* Pods */,
 				F9F00510A299D8E09CC7367A /* Frameworks */,
 				A9D7A66A2770BEF800094E55 /* oround-Bridging-Header.h */,
-				A9B296F12786946A006CE5B9 /* oround copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -446,9 +444,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = oround/oround.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = U5K7UFZ43J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -468,7 +466,7 @@
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snaps.oround;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = AppStoreOround;
 				SWIFT_OBJC_BRIDGING_HEADER = "oround-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -484,9 +482,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = oround/oround.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = U5K7UFZ43J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -506,7 +504,7 @@
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snaps.oround;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = AppStoreOround;
 				SWIFT_OBJC_BRIDGING_HEADER = "oround-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

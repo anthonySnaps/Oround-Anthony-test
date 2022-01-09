@@ -20,14 +20,14 @@ class MainViewController: UIViewController,
     var popupWebView: WKWebView?
     let popupViewContentController = WKUserContentController()
     
-
+    
     lazy var button: UIButton = {
         let button = UIButton(frame: CGRect(x:30,
                                             y:45,
                                             width:50,
                                             height:50))
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-//        button.translatesAutoresizingMaskIntoConstraints = false
+        //        button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named:"x2"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.contentHorizontalAlignment = .center
@@ -49,10 +49,34 @@ class MainViewController: UIViewController,
         activityIndicator.stopAnimating()
         return activityIndicator
     }()
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
+    var isDarkContentBackground = false // <1>
+
+    func statusBarEnterLightBackground() { // <2>
+        isDarkContentBackground = false
+        setNeedsStatusBarAppearanceUpdate()
     }
+
+    func statusBarEnterDarkBackground() { // <3>
+        isDarkContentBackground = true
+        setNeedsStatusBarAppearanceUpdate()
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if isDarkContentBackground { // <5>
+            return .lightContent
+        } else {
+            if #available(iOS 13.0, *) {
+                return .darkContent
+            } else {
+                return .lightContent
+            }
+        }
+    }
+    
+//
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .darkContent
+//    }
     // LoadView
     override func loadView() {
         let preferences = WKPreferences()
@@ -65,11 +89,17 @@ class MainViewController: UIViewController,
         mainWebView = WKWebView()
         mainWebView.navigationDelegate = self
         mainWebView.uiDelegate = self
-        mainWebView.layoutMargins = UIEdgeInsets.init(top:0, left:0, bottom:30, right:0);
-
-        view = mainWebView
         
-//        // 1.
+        
+        view = UIView()
+        view.frame = UIScreen.main.bounds
+        view.backgroundColor = .white
+        
+        mainWebView.frame = CGRect(x:0, y:0, width:UIScreen.main.bounds.maxX, height:UIScreen.main.bounds.maxY-20)
+        
+        view.addSubview(mainWebView)
+        
+        //        // 1.
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
@@ -80,7 +110,7 @@ class MainViewController: UIViewController,
             statusbarView.frame = CGRect.zero
             view.addSubview(statusbarView)
             statusbarView.translatesAutoresizingMaskIntoConstraints = false
-
+            
             NSLayoutConstraint.activate([
                 statusbarView.topAnchor.constraint(equalTo: view.topAnchor),
                 statusbarView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1.0),
@@ -88,6 +118,9 @@ class MainViewController: UIViewController,
                 statusbarView.bottomAnchor.constraint(equalTo: margin.topAnchor)
                 
             ])
+//            UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+
+            
         } else {
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
             statusBar?.backgroundColor = .white
@@ -123,20 +156,21 @@ class MainViewController: UIViewController,
      * Setup UI
      */
     func setupLayout() {
-        if let urlString = Bundle.main.object(forInfoDictionaryKey: "OROUND_URL") as? String {
-            let url = URL(string: urlString)!
-            mainWebView.load(URLRequest(url: url))
-            mainWebView.allowsBackForwardNavigationGestures = true
-            mainWebView.configuration.preferences.javaScriptCanOpenWindowsAutomatically = true
-        }
-
+#if DEBUG
+        let url = URL(string: "https://dev.oround.com")!
+#else
+        let url = URL(string: "https://www.oround.com")!
+#endif
+        mainWebView.load(URLRequest(url: url))
+        mainWebView.allowsBackForwardNavigationGestures = true
+        mainWebView.configuration.preferences.javaScriptCanOpenWindowsAutomatically = true
     }
     
     @objc func timerFired() {
         popupWebView?.layer.opacity = 1.0
         activityIndicator.stopAnimating()
     }
-
+    
     /**********
      * Alert
      */
@@ -186,7 +220,7 @@ class MainViewController: UIViewController,
         popupWebView?.uiDelegate = self
         popupWebView?.addSubview(button)
         popupWebView?.addSubview(activityIndicator)
-    
+        
         
         debugPrint("FRAME : \(button.frame)")
         view.addSubview(popupWebView!)
@@ -194,12 +228,12 @@ class MainViewController: UIViewController,
     }
     
     func webView(_ webView:WKWebView, didFinish navigation:WKNavigation!) {
-//        timer.invalidate()
+        //        timer.invalidate()
         popupWebView?.layer.opacity = 1.0
         activityIndicator.stopAnimating()
     }
-
-  
+    
+    
     
     func webView(_ webView: WKWebView,
                  decidePolicyFor navigationAction: WKNavigationAction,
