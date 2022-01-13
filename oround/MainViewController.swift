@@ -22,10 +22,10 @@ class MainViewController: UIViewController,
     
     
     lazy var button: UIButton = {
-        let button = UIButton(frame: CGRect(x:30,
-                                            y:45,
-                                            width:50,
-                                            height:50))
+        let button = UIButton(frame: CGRect(x:view.frame.maxX-80,
+                                            y:40,
+                                            width:60,
+                                            height:60))
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         //        button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named:"x2"), for: .normal)
@@ -85,8 +85,13 @@ class MainViewController: UIViewController,
         let configuration = WKWebViewConfiguration()
         configuration.preferences = preferences
         configuration.websiteDataStore = WKWebsiteDataStore.default()
+        configuration.applicationNameForUserAgent = "OIOS"
+//        if let userAgent = configuration.applicationNameForUserAgent  {
+//            configuration.applicationNameForUserAgent =  userAgent + "+OIOS"
+//        }
         
-        mainWebView = WKWebView()
+        
+        mainWebView = WKWebView(frame:CGRect(x:0, y:0, width:UIScreen.main.bounds.maxX, height:UIScreen.main.bounds.maxY-20), configuration: configuration)
         mainWebView.navigationDelegate = self
         mainWebView.uiDelegate = self
         
@@ -95,7 +100,7 @@ class MainViewController: UIViewController,
         view.frame = UIScreen.main.bounds
         view.backgroundColor = .white
         
-        mainWebView.frame = CGRect(x:0, y:0, width:UIScreen.main.bounds.maxX, height:UIScreen.main.bounds.maxY-20)
+//        mainWebView.frame = CGRect(x:0, y:0, width:UIScreen.main.bounds.maxX, height:UIScreen.main.bounds.maxY-20)
         
         view.addSubview(mainWebView)
         
@@ -212,7 +217,7 @@ class MainViewController: UIViewController,
         userController.add(self, name: "oround")
         userController.add(self, name: "setting")
         configuration.userContentController = userController
-        configuration.applicationNameForUserAgent = "Version/8.0.2 Safari/600.2.5"
+        configuration.applicationNameForUserAgent = "OIOS"
         
         popupWebView = WKWebView(frame: view.bounds, configuration: configuration)
         popupWebView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -254,7 +259,7 @@ class MainViewController: UIViewController,
         print("=====>url = \(url), host = \(hostAddress?.description ?? "")")
         
 #endif
-        popupWebView?.layer.opacity = 0.8
+        popupWebView?.layer.opacity = 1.0
         activityIndicator.startAnimating()
         var timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(timerFired), userInfo: nil, repeats: false)
         let url_elements = url.components(separatedBy: ":")
