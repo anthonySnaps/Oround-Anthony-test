@@ -24,6 +24,10 @@
 	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>itms-apps</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -32,6 +36,8 @@
 		<true/>
 		<key>NSAllowsArbitraryLoadsInWebContent</key>
 		<true/>
+		<key>NSAllowsArbitraryLoadsUsageDescription</key>
+		<dict/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>프로필 이미지 및 아트워크 업로드를 위해 미디어를 사용합니다</string>

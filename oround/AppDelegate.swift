@@ -177,12 +177,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         /*핑거푸시 읽음처리*/
         checkPush(userInfo)
         
-        //        let strAction = response.actionIdentifier
-        //        print(strAction)
-        //        if strAction.contains("yes") || strAction.contains("UNNotificationDefaultActionIdentifier") {
-        //            showPopUp(userInfo: userInfo)
-        //        }
-        
+        let strAction = response.actionIdentifier
+        print(strAction)
+//        if strAction.contains("yes") || strAction.contains("UNNotificationDefaultActionIdentifier") {
+//            let alert = UIAlertController(title: "OROUND",
+//                                          message: userInfo.,
+//                                          preferredStyle: UIAlertController.Style.alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+//            self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+//        }
+//
         completionHandler()
     }
     
@@ -207,49 +211,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    
-    //MARK: -
-    func showPopUp(userInfo:[AnyHashable: Any]){
-        
-        //        var topRootViewController = UIApplication.shared.keyWindow!.rootViewController
-        //
-        //        while topRootViewController!.presentedViewController != nil
-        //        {
-        //            topRootViewController = topRootViewController!.presentedViewController
-        //        }
-        //
-        //        if topRootViewController!.isKind(of: UINavigationController.self){
-        //
-        //            let root = (topRootViewController as! UINavigationController).viewControllers.first
-        //
-        //            if root!.isKind(of: PopUpTableViewController.self){
-        //
-        //                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        //                let child = mainStoryboard.instantiateViewController(withIdentifier: "PopUpTableViewController") as! PopUpTableViewController
-        //                child.dicData = userInfo as [NSObject : AnyObject]?
-        //                (topRootViewController as! UINavigationController).pushViewController(child, animated: false)
-        //
-        //            }
-        //
-        //        } else if topRootViewController!.isKind(of: TabBarController.self){
-        //
-        //            (topRootViewController as! TabBarController).showPopUp(userInfo)
-        //
-        //        }
-        
-    }
-    
+   
     //MARK: - 푸시 오픈 체크
     func checkPush(_ UserInfo : [AnyHashable : Any]){
-        
         finger.sharedData().requestPushCheck(withBlock: UserInfo , { (posts, error) -> Void in
-            
             print("###posts: \(String(describing: posts)) error: \(String(describing: error))")
-            
         })
     }
-    
-    
 }
 
 
@@ -265,8 +233,6 @@ extension AppDelegate: MessagingDelegate {
             object: nil,
             userInfo: dataDict
         )
-        // TODO: If necessary send token to application server.
-        // Note: This callback is fired at each app startup and whenever a new token is generated.
     }
     
     // [END refresh_token]

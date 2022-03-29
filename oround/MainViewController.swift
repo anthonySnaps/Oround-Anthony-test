@@ -19,7 +19,11 @@ class MainViewController: UIViewController,
     var mainWebView: WKWebView!
     var popupWebView: WKWebView?
     let popupViewContentController = WKUserContentController()
-    
+#if DEBUG
+    let url = URL(string: "https://dev.oround.com")!
+#else
+    let url = URL(string: "https://www.oround.com")!
+#endif
     
     lazy var button: UIButton = {
         let button = UIButton(frame: CGRect(x:view.frame.maxX-80,
@@ -85,7 +89,7 @@ class MainViewController: UIViewController,
         let configuration = WKWebViewConfiguration()
         configuration.preferences = preferences
         configuration.websiteDataStore = WKWebsiteDataStore.default()
-        configuration.applicationNameForUserAgent = "OIOS"
+        configuration.applicationNameForUserAgent = "+OIOS/1.0.0 Safari/600.2.5"
 //        if let userAgent = configuration.applicationNameForUserAgent  {
 //            configuration.applicationNameForUserAgent =  userAgent + "+OIOS"
 //        }
@@ -130,8 +134,17 @@ class MainViewController: UIViewController,
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
             statusBar?.backgroundColor = .white
         }
+        
+        
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+#if DEBUG
+#else
+        checkVersion()
+#endif
+    }
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -155,17 +168,14 @@ class MainViewController: UIViewController,
                 }
             }
         }
+
     }
     
     /**********
      * Setup UI
      */
     func setupLayout() {
-#if DEBUG
-        let url = URL(string: "https://dev.oround.com")!
-#else
-        let url = URL(string: "https://www.oround.com")!
-#endif
+
         mainWebView.load(URLRequest(url: url))
         mainWebView.allowsBackForwardNavigationGestures = true
         mainWebView.configuration.preferences.javaScriptCanOpenWindowsAutomatically = true
@@ -174,6 +184,75 @@ class MainViewController: UIViewController,
     @objc func timerFired() {
         popupWebView?.layer.opacity = 1.0
         activityIndicator.stopAnimating()
+    }
+
+    func checkVersion() {
+
+        let gAppVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        let gAppBuild = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") ?? "0"
+        print("Version", gAppVersion, gAppBuild)
+        
+        let session = URLSession.shared
+#if DEBUG
+        guard let requestURL = URL(string: "https://dev-api.oround.com/api/v1/app-version") else { return }
+#else
+        guard let requestURL = URL(string: "https://api.oround.com/api/v1/app-version") else { return }
+#endif
+        let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL as URL)
+        let task = session.dataTask(with: urlRequest as URLRequest) { (data, response, error) -> Void in
+
+            let httpResponse = response as! HTTPURLResponse
+            let statusCode = httpResponse.statusCode
+
+            if(statusCode == 200)
+            {
+                do {
+                    let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+                    
+                    let jsonObject = jsonResponse as! NSDictionary
+                    if let iosMajorVersion = jsonObject["iosMajorVersion"] {
+                    if let iosMinorVersion = jsonObject["iosMinorVersion"] {
+                    if let iosPatchVersion = jsonObject["iosPatchVersion"] {
+                        
+                        let compareResult = gAppVersion.compare("\(iosMajorVersion).\(iosMinorVersion).\(iosPatchVersion)", options: .numeric)
+                        print(">>>\(compareResult.rawValue) ==> \(iosMajorVersion).\(iosMinorVersion).\(iosPatchVersion)")
+                        if (compareResult.rawValue < 0) {
+                            self.showUpdateModal()
+                        }
+                    }}}
+                }
+                catch let error
+                {
+                    print(error)
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    func showUpdateModal() {
+        
+        let alertController = UIAlertController(title: "업데이트 알림".localized(),
+                                                message: "새로운 버전이 출시되었습니다.\n업데이트 후 이용해 주시기 바랍니다.".localized(), preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "업데이트".localized(), style: .default) { _ in
+            if let url = URL(string: "itms-apps://itunes.apple.com/app/id1596427790"),
+                UIApplication.shared.canOpenURL(url) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: {success in
+                        exit(0)
+                    })
+                } else {
+                    UIApplication.shared.openURL(url)
+                    exit(0)
+                }
+            }
+        }
+        alertController.addAction(okAction)
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
+
     }
     
     /**********
@@ -194,7 +273,7 @@ class MainViewController: UIViewController,
      * Confirm
      */
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
-        let alertController = UIAlertController(title: "test", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "OROUND", message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
             completionHandler(false)
         }
@@ -217,7 +296,8 @@ class MainViewController: UIViewController,
         userController.add(self, name: "oround")
         userController.add(self, name: "setting")
         configuration.userContentController = userController
-        configuration.applicationNameForUserAgent = "OIOS"
+//        configuration.applicationNameForUserAgent = "Version/8.0.2 Safari/600.2.5"
+        configuration.applicationNameForUserAgent = "+OIOS/1.0.0 Safari/600.2.5"
         
         popupWebView = WKWebView(frame: view.bounds, configuration: configuration)
         popupWebView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -259,9 +339,13 @@ class MainViewController: UIViewController,
         print("=====>url = \(url), host = \(hostAddress?.description ?? "")")
         
 #endif
-        popupWebView?.layer.opacity = 1.0
+        if url.contains("https://appleid.apple.com") == false {
+            popupWebView?.layer.opacity = 1.0
+        } else {
+            popupWebView?.layer.opacity = 0.7
+        }
         activityIndicator.startAnimating()
-        var timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(timerFired), userInfo: nil, repeats: false)
+        var timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerFired), userInfo: nil, repeats: false)
         let url_elements = url.components(separatedBy: ":")
         if url_elements[0].contains("http") == false &&
             url_elements[0].contains("https") == false {
@@ -313,6 +397,7 @@ class MainViewController: UIViewController,
 
 
 
+
 extension MainViewController : WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         
@@ -327,6 +412,26 @@ extension MainViewController : WKScriptMessageHandler {
                     popupWebView.removeFromSuperview()
                 }
             }
+            // 나이스 인증은 result, key로 값이 리턴됨
+            if let result = bodyString["result"] {
+                if (result=="success") {
+                    guard let key = bodyString["key"] else {return}
+                    debugPrint("RECEIVED KEY **************\(key)")
+                    mainWebView.evaluateJavaScript(
+                        "window.postMessage({\"result\":\"success\", \"token\":\"\(key)\"});"
+                        , completionHandler: nil)
+                    if let popupWebView = self.popupWebView {
+                        popupWebView.removeFromSuperview()
+                    }
+                } else {
+                    mainWebView.evaluateJavaScript(
+                        "window.postMessage({\"result\":\"fail\"});"
+                        , completionHandler: nil)
+                    if let popupWebView = self.popupWebView {
+                        popupWebView.removeFromSuperview()
+                    }
+                }
+            }
         } else if ( message.name=="setting" ) {
             let vc = SettingModalViewController()
             vc.modalPresentationStyle = .overCurrentContext
@@ -335,3 +440,32 @@ extension MainViewController : WKScriptMessageHandler {
     }
 }
 
+
+extension Bundle {
+
+    var appName: String {
+        return infoDictionary?["CFBundleName"] as! String
+    }
+
+    var bundleId: String {
+        return bundleIdentifier!
+    }
+
+    var versionNumber: String {
+        return infoDictionary?["CFBundleShortVersionString"] as! String
+    }
+
+    var buildNumber: String {
+        return infoDictionary?["CFBundleVersion"] as! String
+    }
+
+}
+
+
+extension String {
+    
+    func localized(comment: String = "") -> String {
+        return NSLocalizedString(self, comment: comment)
+    }
+    
+}

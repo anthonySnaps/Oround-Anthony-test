@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,19 +12,21 @@
 		5A9B92EC248A2EB800B88C61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A9B92EA248A2EB800B88C61 /* Main.storyboard */; };
 		5A9B92EE248A2EBA00B88C61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A9B92ED248A2EBA00B88C61 /* Assets.xcassets */; };
 		5A9B92F1248A2EBA00B88C61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A9B92EF248A2EBA00B88C61 /* LaunchScreen.storyboard */; };
+		927EACCF27F2DC7200681D12 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 927EACCE27F2DC7200681D12 /* FirebaseAnalytics */; };
+		927EACD127F2DC7200681D12 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 927EACD027F2DC7200681D12 /* FirebaseCrashlytics */; };
+		927EACD327F2DC7200681D12 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 927EACD227F2DC7200681D12 /* FirebaseMessaging */; };
+		927EACD627F2DC9900681D12 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 927EACD527F2DC9900681D12 /* SnapKit */; };
 		A952E740276DAA3C00710434 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A952E73F276DAA3C00710434 /* WelcomeViewController.swift */; };
 		A952E745276EBF7000710434 /* oround.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A952E744276EBF7000710434 /* oround.xcassets */; };
-		A952E747276EC62D00710434 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = A952E746276EC62D00710434 /* Podfile */; };
 		A9CA14B727857E9F00872C80 /* finger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A67F2127856EE400AA547B /* finger.framework */; };
 		A9CB0C062773827000B438F1 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CB0C052773827000B438F1 /* UIApplication.swift */; };
 		A9CB0C0A2773A23C00B438F1 /* SettingModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CB0C092773A23C00B438F1 /* SettingModalViewController.swift */; };
+		A9D3E43E27C535970072709F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9D3E44027C535970072709F /* Localizable.strings */; };
 		A9D7A6702770CB7E00094E55 /* OroundPageContol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D7A66F2770CB7E00094E55 /* OroundPageContol.swift */; };
 		A9E2321927817ABA00A863B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9E2321827817ABA00A863B1 /* GoogleService-Info.plist */; };
-		E4BA33ED1377CD27CD0F81B8 /* Pods_oround.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FA1900B5296D62B1C120958 /* Pods_oround.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4E91F1ECD5EB2BF2810C3F2F /* Pods-oround.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oround.release.xcconfig"; path = "Target Support Files/Pods-oround/Pods-oround.release.xcconfig"; sourceTree = "<group>"; };
 		5A9B92E3248A2EB800B88C61 /* oround.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = oround.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A9B92E6248A2EB800B88C61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A9B92E8248A2EB800B88C61 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -32,19 +34,23 @@
 		5A9B92ED248A2EBA00B88C61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A9B92F0248A2EBA00B88C61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5A9B92F2248A2EBA00B88C61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7FA1900B5296D62B1C120958 /* Pods_oround.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_oround.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A952E73F276DAA3C00710434 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		A952E744276EBF7000710434 /* oround.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = oround.xcassets; sourceTree = "<group>"; };
-		A952E746276EC62D00710434 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A9A67F2127856EE400AA547B /* finger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = finger.framework; sourceTree = "<group>"; };
 		A9CB0C052773827000B438F1 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		A9CB0C092773A23C00B438F1 /* SettingModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingModalViewController.swift; sourceTree = "<group>"; };
+		A9D3E43F27C535970072709F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A9D3E44127C535DC0072709F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		A9D3E44227C535DC0072709F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		A9D3E44327C535DC0072709F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A9D3E44427C535E30072709F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		A9D3E44527C535E30072709F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		A9D3E44627C535E30072709F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A9D7A6682770B8CB00094E55 /* oround.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = oround.entitlements; sourceTree = "<group>"; };
 		A9D7A66A2770BEF800094E55 /* oround-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "oround-Bridging-Header.h"; sourceTree = "<group>"; };
 		A9D7A66B2770BEF800094E55 /* oround.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = oround.h; sourceTree = "<group>"; };
 		A9D7A66F2770CB7E00094E55 /* OroundPageContol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OroundPageContol.swift; sourceTree = "<group>"; };
 		A9E2321827817ABA00A863B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		EE4C93DBF2FF5339290BF7B8 /* Pods-oround.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oround.debug.xcconfig"; path = "Target Support Files/Pods-oround/Pods-oround.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +58,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4BA33ED1377CD27CD0F81B8 /* Pods_oround.framework in Frameworks */,
+				927EACD327F2DC7200681D12 /* FirebaseMessaging in Frameworks */,
+				927EACD127F2DC7200681D12 /* FirebaseCrashlytics in Frameworks */,
+				927EACCF27F2DC7200681D12 /* FirebaseAnalytics in Frameworks */,
 				A9CA14B727857E9F00872C80 /* finger.framework in Frameworks */,
+				927EACD627F2DC9900681D12 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +75,6 @@
 				A9D7A66B2770BEF800094E55 /* oround.h */,
 				A9E2321827817ABA00A863B1 /* GoogleService-Info.plist */,
 				5A9B92E5248A2EB800B88C61 /* oround */,
-				97FC189B05649631570EC25D /* Pods */,
 				F9F00510A299D8E09CC7367A /* Frameworks */,
 				A9D7A66A2770BEF800094E55 /* oround-Bridging-Header.h */,
 			);
@@ -95,19 +103,10 @@
 				5A9B92ED248A2EBA00B88C61 /* Assets.xcassets */,
 				5A9B92EF248A2EBA00B88C61 /* LaunchScreen.storyboard */,
 				5A9B92F2248A2EBA00B88C61 /* Info.plist */,
-				A952E746276EC62D00710434 /* Podfile */,
 				5A9B92E4248A2EB800B88C61 /* Products */,
+				A9D3E44027C535970072709F /* Localizable.strings */,
 			);
 			path = oround;
-			sourceTree = "<group>";
-		};
-		97FC189B05649631570EC25D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				EE4C93DBF2FF5339290BF7B8 /* Pods-oround.debug.xcconfig */,
-				4E91F1ECD5EB2BF2810C3F2F /* Pods-oround.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		A952E743276EBF4000710434 /* Resources */ = {
@@ -139,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				A9A67F2127856EE400AA547B /* finger.framework */,
-				7FA1900B5296D62B1C120958 /* Pods_oround.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -151,11 +149,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5A9B92F5248A2EBA00B88C61 /* Build configuration list for PBXNativeTarget "oround" */;
 			buildPhases = (
-				12105A08F0E2BB47030E188C /* [CP] Check Pods Manifest.lock */,
 				5A9B92DF248A2EB800B88C61 /* Sources */,
 				5A9B92E0248A2EB800B88C61 /* Frameworks */,
 				5A9B92E1248A2EB800B88C61 /* Resources */,
-				7E228A1DBC2A9209AA1CA392 /* [CP] Embed Pods Frameworks */,
 				A9A67F252785703E00AA547B /* ShellScript */,
 			);
 			buildRules = (
@@ -164,6 +160,10 @@
 			);
 			name = oround;
 			packageProductDependencies = (
+				927EACCE27F2DC7200681D12 /* FirebaseAnalytics */,
+				927EACD027F2DC7200681D12 /* FirebaseCrashlytics */,
+				927EACD227F2DC7200681D12 /* FirebaseMessaging */,
+				927EACD527F2DC9900681D12 /* SnapKit */,
 			);
 			productName = wkwebview;
 			productReference = 5A9B92E3248A2EB800B88C61 /* oround.app */;
@@ -191,9 +191,13 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
+				ko,
 			);
 			mainGroup = 5A9B92DA248A2EB800B88C61;
 			packageReferences = (
+				927EACCD27F2DC7200681D12 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				927EACD427F2DC9900681D12 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 5A9B92E4248A2EB800B88C61 /* Products */;
 			projectDirPath = "";
@@ -209,9 +213,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A952E747276EC62D00710434 /* Podfile in Resources */,
 				5A9B92F1248A2EBA00B88C61 /* LaunchScreen.storyboard in Resources */,
 				5A9B92EE248A2EBA00B88C61 /* Assets.xcassets in Resources */,
+				A9D3E43E27C535970072709F /* Localizable.strings in Resources */,
 				A952E745276EBF7000710434 /* oround.xcassets in Resources */,
 				5A9B92EC248A2EB800B88C61 /* Main.storyboard in Resources */,
 				A9E2321927817ABA00A863B1 /* GoogleService-Info.plist in Resources */,
@@ -221,45 +225,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		12105A08F0E2BB47030E188C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-oround-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7E228A1DBC2A9209AA1CA392 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-oround/Pods-oround-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-oround/Pods-oround-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-oround/Pods-oround-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A9A67F252785703E00AA547B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -302,6 +267,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				5A9B92EB248A2EB800B88C61 /* Base */,
+				A9D3E44127C535DC0072709F /* ja */,
+				A9D3E44427C535E30072709F /* ko */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -310,8 +277,20 @@
 			isa = PBXVariantGroup;
 			children = (
 				5A9B92F0248A2EBA00B88C61 /* Base */,
+				A9D3E44227C535DC0072709F /* ja */,
+				A9D3E44527C535E30072709F /* ko */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A9D3E44027C535970072709F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9D3E43F27C535970072709F /* en */,
+				A9D3E44327C535DC0072709F /* ja */,
+				A9D3E44627C535E30072709F /* ko */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -321,6 +300,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -384,6 +364,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -439,14 +420,13 @@
 		};
 		5A9B92F6248A2EBA00B88C61 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EE4C93DBF2FF5339290BF7B8 /* Pods-oround.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = oround/oround.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 18;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = U5K7UFZ43J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -463,10 +443,10 @@
 					/usr/lib/swift,
 					"$(PROJECT_DIR)/**",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snaps.oround;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = AppStoreOround;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "oround-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -477,14 +457,13 @@
 		};
 		5A9B92F7248A2EBA00B88C61 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4E91F1ECD5EB2BF2810C3F2F /* Pods-oround.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = oround/oround.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 18;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = U5K7UFZ43J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -501,10 +480,10 @@
 					/usr/lib/swift,
 					"$(PROJECT_DIR)/**",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snaps.oround;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = AppStoreOround;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "oround-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -534,6 +513,48 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		927EACCD27F2DC7200681D12 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+		927EACD427F2DC9900681D12 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		927EACCE27F2DC7200681D12 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 927EACCD27F2DC7200681D12 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		927EACD027F2DC7200681D12 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 927EACCD27F2DC7200681D12 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		927EACD227F2DC7200681D12 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 927EACCD27F2DC7200681D12 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		927EACD527F2DC9900681D12 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 927EACD427F2DC9900681D12 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5A9B92DB248A2EB800B88C61 /* Project object */;
 }

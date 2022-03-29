@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  oround
+
+  Created by thinoo on 2022/02/23.
+  
+*/
+
+"업데이트" = "Update";
+"취소" = "Cancel";
+"업데이트 알림" = "Update available";
+"새로운 버전이 출시되었습니다.\n업데이트 후 이용해 주시기 바랍니다." = "OROUND recommends that you\nUpdate to the latest version";
+
