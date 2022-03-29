@@ -15,7 +15,6 @@
 		927EACCF27F2DC7200681D12 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 927EACCE27F2DC7200681D12 /* FirebaseAnalytics */; };
 		927EACD127F2DC7200681D12 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 927EACD027F2DC7200681D12 /* FirebaseCrashlytics */; };
 		927EACD327F2DC7200681D12 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 927EACD227F2DC7200681D12 /* FirebaseMessaging */; };
-		927EACD627F2DC9900681D12 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 927EACD527F2DC9900681D12 /* SnapKit */; };
 		A952E740276DAA3C00710434 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A952E73F276DAA3C00710434 /* WelcomeViewController.swift */; };
 		A952E745276EBF7000710434 /* oround.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A952E744276EBF7000710434 /* oround.xcassets */; };
 		A9CA14B727857E9F00872C80 /* finger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A67F2127856EE400AA547B /* finger.framework */; };
@@ -62,7 +61,6 @@
 				927EACD127F2DC7200681D12 /* FirebaseCrashlytics in Frameworks */,
 				927EACCF27F2DC7200681D12 /* FirebaseAnalytics in Frameworks */,
 				A9CA14B727857E9F00872C80 /* finger.framework in Frameworks */,
-				927EACD627F2DC9900681D12 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,7 +161,6 @@
 				927EACCE27F2DC7200681D12 /* FirebaseAnalytics */,
 				927EACD027F2DC7200681D12 /* FirebaseCrashlytics */,
 				927EACD227F2DC7200681D12 /* FirebaseMessaging */,
-				927EACD527F2DC9900681D12 /* SnapKit */,
 			);
 			productName = wkwebview;
 			productReference = 5A9B92E3248A2EB800B88C61 /* oround.app */;
@@ -197,7 +194,6 @@
 			mainGroup = 5A9B92DA248A2EB800B88C61;
 			packageReferences = (
 				927EACCD27F2DC7200681D12 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				927EACD427F2DC9900681D12 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 5A9B92E4248A2EB800B88C61 /* Products */;
 			projectDirPath = "";
@@ -523,14 +519,6 @@
 				minimumVersion = 8.0.0;
 			};
 		};
-		927EACD427F2DC9900681D12 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -548,11 +536,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 927EACCD27F2DC7200681D12 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
-		};
-		927EACD527F2DC9900681D12 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 927EACD427F2DC9900681D12 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
