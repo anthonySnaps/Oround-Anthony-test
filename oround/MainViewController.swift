@@ -90,6 +90,7 @@ class MainViewController: UIViewController,
         configuration.preferences = preferences
         configuration.websiteDataStore = WKWebsiteDataStore.default()
         configuration.applicationNameForUserAgent = "+OIOS/1.0.0 Safari/600.2.5"
+        configuration.allowsInlineMediaPlayback = true
 //        if let userAgent = configuration.applicationNameForUserAgent  {
 //            configuration.applicationNameForUserAgent =  userAgent + "+OIOS"
 //        }
